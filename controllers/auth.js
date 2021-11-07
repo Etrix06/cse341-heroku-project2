@@ -5,7 +5,7 @@ const sendgridTransport = require('nodemailer-sendgrid-transport');
 require('dotenv').config();
 const {
   validationResult
-} = require('express-validator/check');
+} = require('express-validator');
 
 const User = require('../models/user');
 
