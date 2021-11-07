@@ -10,9 +10,7 @@
   },
   "author": "Maximilian Schwarzmüller",
   "license": "ISC",
-  "devDependencies": {
-    "nodemon": "^2.0.14"
-  },
+  "devDependencies": {},
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
@@ -32,6 +30,7 @@
     "multer": "^1.4.3",
     "nodemailer": "^6.7.0",
     "nodemailer-sendgrid-transport": "^0.2.0",
+    "nodemon": "^2.0.14",
     "pdfkit": "^0.13.0",
     "pug": "^3.0.2"
   }
