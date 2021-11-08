@@ -5,6 +5,8 @@ I will change them back to original once I am done for the day. So you can ignor
 
 In auth.js controller- 
 comment in line 4
+
+comment in lines 20 - 24
 comment out lines 13 - 18
 
 in postSignup -
@@ -86,6 +88,7 @@ To change back
 
 In auth. js controller-
 comment out line 4
+comment in lines 20 - 24
 comment in lines 13 - 18
 
 Change back bcrypt in lines 147 - 171 to code below

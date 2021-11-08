@@ -17,6 +17,12 @@ const User = require('../models/user');
 //  domain: domain
 //});
 
+const transporter = nodemailer.createTransport(sendgridTransport({ 
+  auth: {
+    api_key: process.env.API_KEY
+  }
+}));
+
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -160,7 +166,8 @@ exports.postSignup = (req, res, next) => {
     to: email,
     from: 'alc18005@byui.edu',
     subject: 'Signup succeeded!',
-    html: '<h1>You successfully signed up to EQ Service Finder!</h1>'            
+    html: '<h1>You successfully signed up to EQ Service Finder!</h1>' ,
+    html: '<h2>Email sent from Heroku-Project2</h2>'           
   }); 
 })
 .catch(err => {
