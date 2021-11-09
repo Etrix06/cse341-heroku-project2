@@ -28,7 +28,8 @@ replace the bcrypt on line 147 - 176 with code below:
         to: email,
         from: 'alc18005@byui.edu',
         subject: 'Signup succeeded!',
-        html: '<h1>You successfully signed up to Alcala Shop!</h1>'            
+        html: '<h1>You successfully signed up to EQ Service Finder!</h1>'
+        html: '<h2>Email sent from Heroku-Project2</h2>'         
       }); 
     })
     .catch(err => {
@@ -65,7 +66,7 @@ exports.postReset = (req, res, next) => {
         from: 'alc18005@byui.edu',
         subject: 'Password reset.',
         html: `
-          <p>You requested a password reset from Alcala Shop</p>
+          <p>You requested a password reset from EQ Service Finder</p>
           <p>Click this <a href="https://cse341-team7-project2.herokuapp.com/reset/${token}">link</a> to set a new password.</p>
         `         
         //   needs to be infront of the /reset above in order to work with academind
