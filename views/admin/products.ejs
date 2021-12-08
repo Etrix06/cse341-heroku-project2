@@ -6,32 +6,9 @@
     <%- include('../includes/navigation.ejs') %>
     <% if (isAuthenticated) { %>
         <header class="main-header">
-            <!--<nav class="main-header__nav">
-                <ul class="main-header__item-list">
-                     <li class="main-header__item">
-                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                    </li> 
-                    <li class="main-header__item">
-                        <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/service">Add Service
-                        </a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products/service">Admin Services
-                        </a>
-                    </li>
-                </ul>
-            </nav>-->
             <nav>
                 <ul class="main-header__item-list">
-                    <!-- <li class="main-header__item">
-                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                    </li> -->
+
                     <li class="main-header__item">
                         <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/<%= eqType %>">Add <%= eqType %>
                         </a>
@@ -81,7 +58,7 @@
             <% } %>
         </div>
         <% } else { %>
-        <h1>No Products Found!</h1>
+        <h1>You have no posts to Edit.</h1>
         <% } %>
     </main>
     <%- include('../includes/end.ejs') %>

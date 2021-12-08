@@ -7,32 +7,8 @@
     <%- include('../includes/navigation.ejs') %>
     <% if (isAuthenticated) { %>
         <header class="main-header">
-            <!--<nav class="main-header__nav">
-                <ul class="main-header__item-list">
-                     <li class="main-header__item">
-                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                    </li> 
-                    <li class="main-header__item">
-                        <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/service">Add Service
-                        </a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products/service">Admin Services
-                        </a>
-                    </li>
-                </ul>
-            </nav> -->
             <nav>
                 <ul class="main-header__item-list">
-                    <!-- <li class="main-header__item">
-                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
-                    </li>
-                    <li class="main-header__item">
-                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
-                    </li> -->
                     <li class="main-header__item">
 
                         <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/<%= eqType %>">Add <%= eqType %>
@@ -64,12 +40,7 @@
                     name="imageUrl" id="imageUrl"
                     value="<% if (editing || hasError) { %><%= product.imageUrl %><% } %>">
             </div>
-            <!-- <div class="form-control">
-                <label for="price">Price</label>
-                <input class="<%= validationErrors.find(e => e.param === 'price') ? 'invalid' : '' %>" type="number"
-                    name="price" id="price" step="0.01"
-                    value="<% if (editing || hasError) { %><%= product.price %><% } %>">
-            </div> -->
+
             <div class="form-control">
                 <label for="description">Description</label>
                 <textarea class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
