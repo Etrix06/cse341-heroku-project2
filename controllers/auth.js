@@ -23,6 +23,7 @@ const transporter = nodemailer.createTransport(sendgridTransport({
   }
 }));
 
+
 exports.getLogin = (req, res, next) => {
   let message = req.flash('error');
   if (message.length > 0) {
@@ -54,6 +55,7 @@ exports.getSignup = (req, res, next) => {
     pageTitle: 'Signup',
     errorMessage: message,
     oldInput: {
+      username: '',
       email: '',
       password: '',
       confirmPassword: ''
@@ -102,6 +104,7 @@ exports.postLogin = (req, res, next) => {
           if (doMatch) {
             req.session.isLoggedIn = true;
             req.session.user = user;
+            req.session.userName = user.username;
             return req.session.save(err => {
               console.log(err);
               res.redirect('/');
@@ -131,6 +134,7 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.postSignup = (req, res, next) => {
+  const username = req.body.username;
   const email = req.body.email;
   const password = req.body.password;
 
@@ -142,6 +146,7 @@ exports.postSignup = (req, res, next) => {
       pageTitle: 'Signup',
       errorMessage: errors.array()[0].msg,
       oldInput: {
+        username: username,
         email: email,
         password: password,
         confirmPassword: req.body.confirmPassword
@@ -154,6 +159,7 @@ exports.postSignup = (req, res, next) => {
   .hash(password, 12)
   .then(hashedPassword => {
     const user = new User({
+      username: username,
       email: email,
       password: hashedPassword,
       cart: { items: [] }
@@ -162,6 +168,7 @@ exports.postSignup = (req, res, next) => {
 })
 .then(result => {
   res.redirect('/login');
+  console.log('email sent!  I hope.')
   return transporter.sendMail({
     to: email,
     from: 'alc18005@byui.edu',
@@ -218,7 +225,7 @@ exports.postReset = (req, res, next) => {
     })
     .then(result => {
       res.redirect('/');
-      console.log('Email sent.');
+      console.log('Email sent.');      
       transporter.sendMail({
         to: req.body.email,
         from: 'alc18005@byui.edu',
@@ -238,7 +245,6 @@ exports.postReset = (req, res, next) => {
     });
   });
 };
-
 exports.getNewPassword = (req, res, next) => {
   const token = req.params.token;
   User.findOne({

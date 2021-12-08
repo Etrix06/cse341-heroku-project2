@@ -5,16 +5,57 @@
 
 <body>
     <%- include('../includes/navigation.ejs') %>
+    <% if (isAuthenticated) { %>
+        <header class="main-header">
+            <!--<nav class="main-header__nav">
+                <ul class="main-header__item-list">
+                     <li class="main-header__item">
+                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                    </li> 
+                    <li class="main-header__item">
+                        <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/service">Add Service
+                        </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products/service">Admin Services
+                        </a>
+                    </li>
+                </ul>
+            </nav> -->
+            <nav>
+                <ul class="main-header__item-list">
+                    <!-- <li class="main-header__item">
+                        <a class="<%= path === '/cart' ? 'active' : '' %>" href="/cart">Cart</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/orders' ? 'active' : '' %>" href="/orders">Orders</a>
+                    </li> -->
+                    <li class="main-header__item">
 
+                        <a class="<%= path === '/admin/add-product' ? 'active' : '' %>" href="/admin/add-product/<%= eqType %>">Add <%= eqType %>
+                        </a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/admin/products' ? 'active' : '' %>" href="/admin/products/<%= eqType %>">Admin <%= eqType %>s
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <% } %>
     <main>
         <% if (errorMessage) { %>
         <div class="user-message user-message--error"><%= errorMessage %></div>
         <% } %>
+        <h2 class="admin">This is where you will add your <%= eqType %>.</h2>
         <form class="product-form" action="/admin/<% if (editing) { %>edit-product<% } else { %>add-product<% } %>"
             method="POST">
             <div class="form-control">
-                <label for="title">Title</label>
-                <input class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>" type="text"
+                <label for="title">Name of <%= eqType %></label>
+                <input class="<%= validationErrors.find(e => e.param === 'title') ? 'invalid' : '' %>" placeholder="<% if (eqType=== 'service') { %> Piano move, Family move, Yard cleanup... <% } else { %> English tutor, Mechanic... <% } %>" type="text"
                     name="title" id="title" value="<% if (editing || hasError) { %><%= product.title %><% } %>">
             </div>
             <div class="form-control">
@@ -32,16 +73,20 @@
             <div class="form-control">
                 <label for="description">Description</label>
                 <textarea class="<%= validationErrors.find(e => e.param === 'description') ? 'invalid' : '' %>"
-                    name="description" id="description"
+                    name="description" id="description" placeholder="Brief description of your <%= eqType %>"
                     rows="5"><% if (editing || hasError) { %><%= product.description %><% } %></textarea>
+            </div>
+            <div class="form-control">
+                <label for="title">Contact Info</label>
+                <input class="<%= validationErrors.find(e => e.param === 'contact') ? 'invalid' : '' %>" type="text" placeholder="email or phone #"
+                    name="contact" id="contact" value="<% if (editing || hasError) { %><%= product.contact %><% } %>">
             </div>
             <% if (editing) { %>
             <input type="hidden" value="<%= product._id %>" name="productId">
             <% } %>
-  
+            <input type="hidden" value="<%= eqType %>" name="eqType">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add
-                Product<% } %></button>
+            <button class="btn" type="submit"><% if (editing) { %>Update Product<% } else { %>Add <%= eqType%><% } %></button>
         </form>
     </main>
     <%- include('../includes/end.ejs') %>

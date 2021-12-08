@@ -7,6 +7,7 @@
 
     <main>
         <div class="image__banner"></div>
+
         <% if (prods.length > 0) { %>
         <div class="grid">
             <% for (let product of prods) { %>
@@ -22,16 +23,23 @@
                     <p class="product__description"><%= product.description %></p>
                 </div>
                 <div class="card__actions">
+                    <% if (!isAuthenticated) { %>
+                        <p>Sign in for contact Info.</p>
+                    <% } %>
+                    <% if (isAuthenticated) { %>
+                        <p>Contact Info: <%= product.contact %></p>
+                    <% } %>
                     <a href="/products/<%= product._id %>" class="btn">Details</a>
                     <% if (isAuthenticated) { %>
-                    <%- include('../includes/add-to-cart.ejs', {product: product}) %>
+                    <%- include('../includes/sign-up.ejs', {product: product}) %>
                     <% } %>
                 </div>
             </article>
             <% } %>
         </div>
+        <%- include('../includes/pagination.ejs', {currentPage: currentPage, nextPage: nextPage, previousPage: previousPage, lastPage: lastPage, hasNextPage: hasNextPage, hasPreviousPage: hasPreviousPage}) %>
         <% } else { %>
-        <h1>No Products Found!</h1>
+        <h1>No Posts Found!</h1>
         <% } %>
     </main>
     <%- include('../includes/end.ejs') %>
