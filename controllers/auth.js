@@ -9,14 +9,6 @@ const {
 
 const User = require('../models/user');
 
-//mailgun email
-//const api_key = process.env.API_KEY;
-//const domain = process.env.DOMAIN;
-//const mailgun = require('mailgun-js')({
-//  apiKey: api_key,
-//  domain: domain
-//});
-
 const transporter = nodemailer.createTransport(sendgridTransport({ 
   auth: {
     api_key: process.env.API_KEY
